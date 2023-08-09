@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AndroidCustomLazyColumnJetpackCompose</string>
+    <string name="card_title">Lorem ipsum dolor</string>
+    <string name="card_body">Donec sem eros, maximus in purus et, laoreet mollis sem. Proin vel metus ornare mauris dictum maximus. Nam sollicitudin, ligula et luctus gravida, sem risus iaculis sem, ac rutrum lacus diam vel metus. Praesent neque orci, dapibus eu dapibus eu, sagittis at arcu.</string>
+</resources>
