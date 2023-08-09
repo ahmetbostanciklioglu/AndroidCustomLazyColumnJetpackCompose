@@ -33,13 +33,12 @@ import androidx.compose.ui.unit.sp
 import com.ahmet.bostanciklioglu.androidcustomlazycolumnjetpackcompose.R
 
 @Composable
-fun LazyColumnList(modifier: Modifier = Modifier) {
-    val imageList =
-        arrayListOf(R.drawable.pizza1, R.drawable.pizza2, R.drawable.pizza3, R.drawable.pizza4)
+fun LazyColumnList(modifier: Modifier = Modifier, lists: ListDataSource) {
+    val itemsList = lists.dataSource()
     LazyColumn(
         modifier = modifier.padding(horizontal = 8.dp)
     ) {
-        items(imageList) { imageId ->
+        items(itemsList) { item ->
             Card(
                 modifier = modifier
                     .fillMaxWidth()
@@ -52,13 +51,17 @@ fun LazyColumnList(modifier: Modifier = Modifier) {
             ) {
                 Row {
                     ListImage(
-                        image = painterResource(id = imageId),
+                        image = painterResource(id = item.image),
                         modifier = modifier
                             .align(alignment = Alignment.CenterVertically)
                             .padding(start = 4.dp)
                     )
                     Spacer(modifier = Modifier.width(12.dp))
-                    ListText(modifier = modifier.padding(vertical = 8.dp))
+                    ListText(
+                        modifier = modifier.padding(vertical = 8.dp),
+                        title = stringResource(id = item.title),
+                        body = stringResource(id = item.content)
+                    )
 
                 }
             }
@@ -84,7 +87,11 @@ fun ListImage(
 }
 
 @Composable
-fun ListText(modifier: Modifier = Modifier) {
+fun ListText(
+    modifier: Modifier = Modifier,
+    title: String,
+    body: String
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(6.dp),
@@ -93,7 +100,7 @@ fun ListText(modifier: Modifier = Modifier) {
             .padding(end = 8.dp)
     ) {
         Text(
-            text = stringResource(id = R.string.card_title),
+            text = title,
             style = TextStyle(
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
@@ -102,7 +109,7 @@ fun ListText(modifier: Modifier = Modifier) {
             )
         )
         Text(
-            text = stringResource(id = R.string.card_body),
+            text = body,
             style = TextStyle(
                 fontWeight = FontWeight.Normal,
                 fontStyle = FontStyle.Normal,
@@ -119,6 +126,6 @@ fun ListText(modifier: Modifier = Modifier) {
 @Composable
 fun LazyColumnListPreview() {
     MaterialTheme {
-        LazyColumnList()
+        LazyColumnList(lists = ListDataSource)
     }
 }
